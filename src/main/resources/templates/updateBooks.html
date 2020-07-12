@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/">Home</a><br><br>
+<a href="/allBooks" > All Books</a>
+
+<h1 style="text-align: center">Update Books</h1>
+
+<form action="/bookUpdate" method="post" th:each="book:${books}">
+    <input type="text" name="title"  th:value="${book.title}">
+    <textarea type="text" name="description"  th:value="${book.description}"></textarea>
+    <input type="number" name="price" th:value="${book.price}">
+    <select name="authorId" th:value="${book.authorId}">
+        <option th:each="author:${authors}" th:text="${author.name}" th:value="${author.id}"></option>
+    </select><br><br>
+    <input type="submit" value="Update"><br><br>
+
+</form>
+
+</body>
+</html>
