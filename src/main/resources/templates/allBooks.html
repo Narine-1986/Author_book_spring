@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,7 +7,10 @@
 <body>
 <a href="/">Home</a><br><br>
 
+<h3 th:text="${msg}" th:if="${msg != null}"></h3>
+
 <h2 >All Books</h2>
+
 <table border="1" >
     <tr>
         <th>Title</th>
@@ -22,9 +25,9 @@
         <td th:text="${book.title}"></td>
         <td th:text="${book.description}"></td>
         <td th:text="${book.price}"></td>
-        <td th:text="${book.authorId}"></td>
-        <td><a th:href="@{/deleteBooks(id=${book.id})}"> delete </a></td>
-        <td><a th:href="@{/updateBooks(id=${book.id})}"> update </a></td>
+        <td th:text="${book.author.id}"></td>
+        <td><a th:href="@{/deleteBook(id=${book.id})}"> delete </a></td>
+        <td><a th:href="@{/editBook(id=${book.id})}">edit</a></td>
     </tr>
 </table><br><br>
 

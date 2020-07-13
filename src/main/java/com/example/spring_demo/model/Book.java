@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.User;
 
 import javax.persistence.*;
 
@@ -24,7 +25,9 @@ public class Book {
     private String description;
     @Column
     private double price;
-    @Column
-    private int authorId;
+//    @Column
+//    private int authorId;
+    @ManyToOne           //(fetch = FetchType.LAZY)
+    private Author author;
 
 }

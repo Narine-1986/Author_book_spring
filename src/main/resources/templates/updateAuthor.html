@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,19 +7,20 @@
 <body>
 
 <a href="/" style="text-align: center">Home page</a><br><br>
+
 <a href="/allAuthors">All Authors</a>
 <h1 >Update Author</h1>
 
-
-<form action="/authorUpdate" method="post" th:each="author:${authors}">
-    <input type="text" name="name" th:value="${author.name}">
+<form action="/updateAuthorSave" method="post" >
+    <input type="hidden" name="id" th:value="${author.id}"><br>
+    <input type="text" name="name"  th:value="${author.name}">
     <input type="text" name="surname" th:value="${author.surname}">
     <input type="text" name="email" th:value="${author.email}">
     <select name="gender" th:value="${author.gender}">
         <option value="MALE">MALE</option>
         <option value="FEMALE">FEMALE</option>
     </select><br><br>
-    <textarea  name="bio" placeholder="Please input your bio" th:value="${author.bio}"style="text-align: center">  </textarea><br><br>
+    <textarea  name="bio"  th:text="${author.bio}">  </textarea><br><br>
     <input type="submit" value="Update"><br><br>
 
 </form>

@@ -10,11 +10,15 @@
 
 
 <h2 >Authors</h2>
+
+
+
 <table border="1">
     <tr>
+        <th>Picture</th>
         <th>Name</th>
         <th>Surname</th>
-        <th>Emale</th>
+        <th>Email</th>
         <th>Gender</th>
         <th>Biography</th>
         <th>Delete</th>
@@ -22,13 +26,15 @@
     </tr>
 
     <tr th:each="author:${authors}">
+        <td><img th:src="@{/image(name=${author.profilePic})}" width="50" height="30"
+                  th:if="${author.profilePic != null && author.profilePic.length() != 0}"/></td>
         <td th:text="${author.name}"></td>
         <td th:text="${author.surname}"></td>
         <td th:text="${author.email}"></td>
         <td th:text="${author.gender}"></td>
         <td th:text="${author.bio}"></td>
         <td><a th:href="@{/deleteAuthor(id=${author.id})}"> delete </a></td>
-        <td><a th:href="@{/updateAuthors(id=${author.id})}"> update </a></td>
+        <td><a th:href="@{/updateAuthor(id=${author.id})}"> update </a></td>
 
     </tr>
 </table><br><br>

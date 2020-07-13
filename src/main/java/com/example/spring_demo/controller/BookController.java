@@ -5,6 +5,7 @@ import com.example.spring_demo.repository.AuthorRepository;
 import com.example.spring_demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,31 +22,37 @@ public class BookController {
 
     @GetMapping("/allBooks")
     public String getAllBooks(ModelMap modelMap) {
-        List<Book> allBooks = bookRepository.findAll();
-        modelMap.addAttribute("books", allBooks);
+        List<Book> books = bookRepository.findAll();
+        modelMap.addAttribute("books", books);
         return "allBooks";
     }
 
-    @GetMapping("/deleteBooks")
-    public String deleteBooks(@RequestParam("id") int id) {
+    @GetMapping("/deleteBook")
+    public String deleteBook(@RequestParam("id") int id) {
         bookRepository.deleteById(id);
-        return ("redirect:/allBooks");
+        return "redirect:/allBooks";
     }
 
-    @RequestMapping("/updateBooks")
-    public String UpdateBooks(ModelMap modelMap, int id) {
-        Book one = bookRepository.getOne(id);
-        List<Author> all = authorRepository.findAll();
-        modelMap.addAttribute("authors", all);
-        modelMap.addAttribute("books", one);
-        return ("updateBooks");
+    @GetMapping("/editBook")
+    public String edit(@RequestParam("id") int id,Model model){
+        Book book = bookRepository.getOne(id);
+        List<Author> authors = authorRepository.findAll();
+        model.addAttribute("authors",authors);
+        model.addAttribute("book",book);
+        return "editBook";
     }
 
-    @PostMapping("/bookUpdate")
-    public String bookUpdate(@ModelAttribute Book book) {
+    @PostMapping("/saveBook")
+    public String add(@ModelAttribute Book book) {
+        String msg = book.getId() > 0 ? "Book was updated" : "Book was added";
+        String ctrlName = book.getId() > 0 ? "allBooks" : "/";
         bookRepository.save(book);
-        return ("redirect:/");
+        return "redirect:"+ctrlName+"?msg"+msg;
     }
+
+
+
+
 
 
 

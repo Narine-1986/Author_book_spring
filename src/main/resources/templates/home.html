@@ -6,10 +6,14 @@
 </head>
 <body>
 
-<h1 >WELCOME HOME PAGE</h1><br><br>
+<h1>WELCOME HOME PAGE</h1><br><br>
 
-Add User:
-<form action="/addAuthor" method="post">
+
+<h3 th:text="${msg}" th:if="${msg != null}"></h3>
+
+
+<h3> Add Author:</h3><br>
+<form action="/addAuthor" method="post" enctype="multipart/form-data">
     <input type="text" name="name" placeholder="Please input name"/><br>
     <input type="text" name="surname" placeholder="Please input surname"/><br>
     <input type="text" name="email" placeholder="please input email"/> <br>
@@ -19,16 +23,18 @@ Add User:
         <option value="FEMALE">Female</option>
     </select><br>
     <textarea name="bio" id="bio" placeholder="Add bio"></textarea> <br>
+    <input type="file" name="image"/><br>
     <input type="submit" value="Add author">
-</form><br><br>
+</form>
+<br><br>
 
 
-Add Book:
-<form action="/addBook" method="post">
+<h3> Add Book:</h3><br>
+<form action="/saveBook" method="post">
     <input type="text" name="title" placeholder="Please input title"/><br>
     <input type="text" name="price" placeholder="Please input price"/><br>
     <textarea name="description" id="description" placeholder="description"></textarea> <br>
-    <select name="authorId">
+    <select name="author.id">
         <option th:each="author:${authors}" th:value="${author.id}" th:text="${author.name}"></option>
     </select><br>
     <input type="submit" value="Add book">
@@ -36,16 +42,10 @@ Add Book:
 <br><br><br>
 
 
-<div style="left: auto " >
+<div style="left: auto ">
     <a href="/allAuthors">View All Authors</a><br><br>
     <a href="/allBooks">View All Books</a>
 </div>
-
-
-
-
-
-
 
 
 </body>
